@@ -1,28 +1,22 @@
-# Given an integer array arr, find the contiguous subarray (containing at least one number) which has the largest sum and returns its sum and prints the subarray.
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # # BRUTE
+        # sums = []
+        # for i in range(len(nums)):
+        #     for j in range(i + 1, len(nums) + 1):
+        #         sums.append(sum(nums[i:j]))
+        # return max(sums)
 
-# brute force
+        # OPTIM
+        maxi = nums[0]
+        curr_maxi = nums[0]
 
-def kadane(arr):
-    temp = []
-    l = len(arr)
-    
-    for i in range(l):
-        s = 0
-        for j in range(i, l):
-            s += arr[j]
-            temp.append(s)
-            
-    return max(temp)
-
-# better solution
-
-def kadane_bet(arr):
-    maxi = arr[0]
-    cur_maxi = arr[0]
-    for i in range(1, len(arr)):
-        cur_maxi = max(arr[i], cur_maxi + arr[i])
-        if cur_maxi > maxi:
-            maxi = cur_maxi
-    return maxi
-
-# note: space/time complexities are better by a mile for the second solution
+        for i in range(1, len(nums)):
+            curr_maxi = max(nums[i], curr_maxi + nums[i])
+            if curr_maxi > maxi:
+                maxi = curr_maxi
+        return maxi
